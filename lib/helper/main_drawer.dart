@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:stok_anggrek/item/home.dart';
+import 'package:stok_anggrek/supp/supplier_page.dart';
+import 'package:stok_anggrek/screen/myhome.dart';
 
 class MainDrawer extends StatelessWidget {
   @override
@@ -54,7 +57,9 @@ class MainDrawer extends StatelessWidget {
                 fontSize: 18,
               ),
             ),
-            onTap: null,
+            onTap: () {
+              Navigator.of(context).pushNamed(HomePage.home);
+            },
           ),
           ListTile(
             leading: Icon(Icons.book),
@@ -64,6 +69,9 @@ class MainDrawer extends StatelessWidget {
                 fontSize: 18,
               ),
             ),
+            // onTap: () {
+            //   Navigator.of(context).pushNamed(ItemPage.ItemP);
+            // },
             onTap: null,
           ),
           ListTile(
@@ -74,6 +82,9 @@ class MainDrawer extends StatelessWidget {
                 fontSize: 18,
               ),
             ),
+            // onTap: () {
+            //   Navigator.of(context).pushNamed(SuppPage.SuppP);
+            // },
             onTap: null,
           ),
         ],
