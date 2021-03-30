@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sqflite/sqflite.dart';
+import 'package:stok_anggrek/helper/main_drawer.dart';
 import 'dart:async';
 import 'package:stok_anggrek/sqlite/dbhelper.dart';
 import 'package:stok_anggrek/sqlite/entryForm.dart';
@@ -25,6 +26,7 @@ class HomeState extends State<Home> {
       appBar: AppBar(
         title: Text('Daftar Item'),
       ),
+      drawer: MainDrawer(),
       body: Column(children: [
         Expanded(
           child: createListView(),
