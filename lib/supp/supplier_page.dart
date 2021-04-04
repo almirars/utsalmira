@@ -80,7 +80,7 @@ class SuppPageState extends State<SuppPage> {
               child: Icon(Icons.ad_units),
             ),
             title: Text(
-              this.suppList[index].name,
+              this.suppList[index].nama,
               style: textStyle,
             ),
             subtitle: Text(this.suppList[index].alamat),

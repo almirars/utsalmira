@@ -16,7 +16,7 @@ class DbHelper {
     String path = directory.path + 'stokAnggrek.db';
 //create, read databases
     var database = openDatabase(path,
-        version: 4, onCreate: _createDb, onUpgrade: _onUpgrade);
+        version: 5, onCreate: _createDb, onUpgrade: _onUpgrade);
 //mengembalikan nilai object sebagai hasil dari fungsinya
     return database;
   }

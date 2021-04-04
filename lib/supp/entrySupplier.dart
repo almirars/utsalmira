@@ -12,13 +12,13 @@ class EntrySupplier extends StatefulWidget {
 class EntrySupplierState extends State<EntrySupplier> {
   Supplier supplier;
   EntrySupplierState(this.supplier);
-  TextEditingController nameController = TextEditingController();
+  TextEditingController namaController = TextEditingController();
   TextEditingController alamatController = TextEditingController();
   @override
   Widget build(BuildContext context) {
 //kondisi
     if (supplier != null) {
-      nameController.text = supplier.name;
+      namaController.text = supplier.nama;
       alamatController.text = supplier.alamat;
     }
 //rubah
@@ -35,7 +35,7 @@ class EntrySupplierState extends State<EntrySupplier> {
               Padding(
                 padding: EdgeInsets.only(top: 20.0, bottom: 20.0),
                 child: TextField(
-                  controller: nameController,
+                  controller: namaController,
                   keyboardType: TextInputType.text,
                   decoration: InputDecoration(
                     labelText: 'Nama Supplier',
@@ -84,12 +84,12 @@ class EntrySupplierState extends State<EntrySupplier> {
                           if (supplier == null) {
 // tambah data
                             supplier = Supplier(
-                              nameController.text,
+                              namaController.text,
                               alamatController.text,
                             );
                           } else {
 // ubah data
-                            supplier.name = nameController.text;
+                            supplier.nama = namaController.text;
                             supplier.alamat = alamatController.text;
                           }
 // kembali ke layar sebelumnya dengan membawa objek item
