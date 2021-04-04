@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:stok_anggrek/models/item.dart';
+import 'package:stok_anggrek/item/item.dart';
 
 class EntryForm extends StatefulWidget {
   final Item item;

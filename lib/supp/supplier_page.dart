@@ -2,29 +2,32 @@ import 'package:flutter/material.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:stok_anggrek/helper/main_drawer.dart';
 import 'dart:async';
-import 'package:stok_anggrek/sqlite/dbhelper.dart';
-import 'package:stok_anggrek/sqlite/entryForm.dart';
-import 'package:stok_anggrek/models/item.dart';
+import 'package:stok_anggrek/dbhelper.dart';
+import 'package:stok_anggrek/supp/entrySupplier.dart';
+// import 'package:stok_anggrek/item/entryForm.dart';
+// import 'package:stok_anggrek/item/item.dart';
+import 'package:stok_anggrek/supp/supplier.dart';
 
 //pendukung program asinkron
-class Home extends StatefulWidget {
+class SuppPage extends StatefulWidget {
+  static const SuppP = '/SuppPage';
   @override
-  HomeState createState() => HomeState();
+  SuppPageState createState() => SuppPageState();
 }
 
-class HomeState extends State<Home> {
+class SuppPageState extends State<SuppPage> {
   DbHelper dbHelper = DbHelper();
   int count = 0;
-  List<Item> itemList;
+  List<Supplier> suppList;
   @override
   Widget build(BuildContext context) {
     updateListView();
-    if (itemList == null) {
-      itemList = List<Item>();
+    if (suppList == null) {
+      suppList = List<Supplier>();
     }
     return Scaffold(
       appBar: AppBar(
-        title: Text('Daftar Item'),
+        title: Text('Daftar Supplier'),
       ),
       drawer: MainDrawer(),
       body: Column(children: [
@@ -36,12 +39,12 @@ class HomeState extends State<Home> {
           child: SizedBox(
             width: double.infinity,
             child: RaisedButton(
-              child: Text("Tambah Item"),
+              child: Text("Tambah Supplier"),
               onPressed: () async {
-                var item = await navigateToEntryForm(context, null);
-                if (item != null) {
+                var supplier = await navigateToEntryForm(context, null);
+                if (supplier != null) {
 //TODO 2 Panggil Fungsi untuk Insert ke DB
-                  int result = await dbHelper.insert(item);
+                  int result = await dbHelper.insertSupp(supplier);
                   if (result > 0) {
                     updateListView();
                   }
@@ -54,10 +57,11 @@ class HomeState extends State<Home> {
     );
   }
 
-  Future<Item> navigateToEntryForm(BuildContext context, Item item) async {
+  Future<Supplier> navigateToEntryForm(
+      BuildContext context, Supplier supplier) async {
     var result = await Navigator.push(context,
         MaterialPageRoute(builder: (BuildContext context) {
-      return EntryForm(item);
+      return EntrySupplier(supplier);
     }));
     return result;
   }
@@ -76,27 +80,27 @@ class HomeState extends State<Home> {
               child: Icon(Icons.ad_units),
             ),
             title: Text(
-              this.itemList[index].name,
+              this.suppList[index].name,
               style: textStyle,
             ),
-            subtitle: Text(this.itemList[index].price.toString()),
+            subtitle: Text(this.suppList[index].alamat),
             trailing: GestureDetector(
               child: Icon(Icons.delete),
               onTap: () async {
-//TODO 3 Panggil Fungsi untuk Delete dari DB berdasarkan Item
-                // dbHelper.delete(this.itemList[index].id);
-                int result = await dbHelper.delete(this.itemList[index].id);
+//TODO 3 Panggil Fungsi untuk Delete dari DB berdasarkan Supplier
+                dbHelper.deleteSupp(this.suppList[index].id);
+                int result = await dbHelper.deleteSupp(this.suppList[index].id);
                 if (result > 0) {
                   updateListView();
                 }
               },
             ),
             onTap: () async {
-              var item =
-                  await navigateToEntryForm(context, this.itemList[index]);
+              var supplier =
+                  await navigateToEntryForm(context, this.suppList[index]);
 //TODO 4 Panggil Fungsi untuk Edit data
-              // dbHelper.update(item);
-              int result = await dbHelper.update(item);
+              dbHelper.updateSupp(supplier);
+              int result = await dbHelper.updateSupp(supplier);
               if (result > 0) {
                 updateListView();
               }
@@ -107,16 +111,16 @@ class HomeState extends State<Home> {
     );
   }
 
-//update List item
+//update List Supplier
   void updateListView() {
     final Future<Database> dbFuture = dbHelper.initDb();
     dbFuture.then((database) {
 //TODO 1 Select data dari DB
-      Future<List<Item>> itemListFuture = dbHelper.getItemList();
-      itemListFuture.then((itemList) {
+      Future<List<Supplier>> supplierListFuture = dbHelper.getSupplierList();
+      supplierListFuture.then((suppList) {
         setState(() {
-          this.itemList = itemList;
-          this.count = itemList.length;
+          this.suppList = suppList;
+          this.count = suppList.length;
         });
       });
     });

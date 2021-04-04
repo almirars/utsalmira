@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class Detail extends StatelessWidget {
+  static const routeName = '/detail';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
