@@ -21,6 +21,8 @@ class MyApp extends StatelessWidget {
       // home: ItemPage(),
       // Item: ItemPage(),
       // initialRoute: '/',
+
+      // untuk memanggil bbrp routes
       routes: {
         '/': (_) => MyHome(),
         ItemPage.ItemP: (_) => ItemPage(),

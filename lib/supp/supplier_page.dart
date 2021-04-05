@@ -10,6 +10,7 @@ import 'package:stok_anggrek/supp/supplier.dart';
 
 //pendukung program asinkron
 class SuppPage extends StatefulWidget {
+  // router untuk memanggil halaman suppPage pada main
   static const SuppP = '/SuppPage';
   @override
   SuppPageState createState() => SuppPageState();
@@ -77,7 +78,7 @@ class SuppPageState extends State<SuppPage> {
           child: ListTile(
             leading: CircleAvatar(
               backgroundColor: Colors.red,
-              child: Icon(Icons.ad_units),
+              child: Text(this.suppList[index].id.toString()),
             ),
             title: Text(
               this.suppList[index].nama,

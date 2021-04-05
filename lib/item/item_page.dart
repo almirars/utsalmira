@@ -8,6 +8,7 @@ import 'package:stok_anggrek/helper/main_drawer.dart';
 
 //pendukung program asinkron
 class ItemPage extends StatefulWidget {
+  // router untuk memanggil halaman ItemPage pada main
   static const ItemP = '/itemPage';
   @override
   ItemPageState createState() => ItemPageState();
@@ -74,7 +75,8 @@ class ItemPageState extends State<ItemPage> {
           child: ListTile(
             leading: CircleAvatar(
               backgroundColor: Colors.red,
-              child: Icon(Icons.ad_units),
+              // child: Icon(Icons.ad_units),
+              child: Text(this.itemList[index].id.toString()),
             ),
             title: Text(
               this.itemList[index].name,
